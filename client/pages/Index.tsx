@@ -32,9 +32,25 @@ export default function Index() {
           
           {/* Editors Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-[33px] gap-x-[22px] max-w-[842px] justify-items-center lg:justify-items-start">
-            {sampleEditors.map((editor) => (
-              <EditorCard key={editor.id} editor={editor} />
-            ))}
+            {loading ? (
+              <div className="col-span-full flex items-center justify-center py-12">
+                <div className="text-center">
+                  <div className="animate-spin h-8 w-8 border-2 border-primary-yellow border-t-transparent rounded-full mx-auto mb-4"></div>
+                  <p className="text-primary-text">Loading editors...</p>
+                </div>
+              </div>
+            ) : error ? (
+              <div className="col-span-full flex items-center justify-center py-12">
+                <div className="text-center">
+                  <p className="text-red-600 mb-2">Error loading editors</p>
+                  <p className="text-primary-text text-sm">{error}</p>
+                </div>
+              </div>
+            ) : (
+              editors.map((editor) => (
+                <EditorCard key={editor.id} editor={editor} />
+              ))
+            )}
           </div>
         </div>
         
