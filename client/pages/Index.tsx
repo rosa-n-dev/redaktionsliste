@@ -35,7 +35,8 @@ export default function Index() {
                 <p className="text-sm text-amber-800">
                   <strong>Using sample data.</strong> Connect to Supabase to display editors from your VOL.AT_Redaktionsliste_2025 table.
                   <br />
-                  <a href="#open-mcp-popover" className="text-amber-900 underline">Open MCP popover</a> and connect to Supabase.
+                  <a href="#open-mcp-popover" className="text-amber-900 underline">Open MCP popover</a> and connect to Supabase, or{' '}
+                  <a href="/supabase-demo" className="text-amber-900 underline font-semibold">test your Supabase connection</a>.
                 </p>
               </div>
             )}
