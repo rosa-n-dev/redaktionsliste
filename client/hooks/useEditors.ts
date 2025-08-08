@@ -98,7 +98,7 @@ export function useEditors(): UseEditorsReturn {
   };
 
   const setupRealtimeSubscription = () => {
-    if (!isUsingSupabase) {
+    if (!isUsingSupabase || !supabase) {
       return () => {}; // No cleanup needed for sample data
     }
 
