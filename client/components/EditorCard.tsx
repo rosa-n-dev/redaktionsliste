@@ -18,8 +18,6 @@ interface EditorCardProps {
 }
 
 export function EditorCard({ editor }: EditorCardProps) {
-  console.log('EditorCard received editor:', editor);
-
   return (
     <div className="w-full max-w-[317px] lg:max-w-[410px] h-[172px] flex bg-white rounded-[4px] shadow-sm">
       {/* Profile Image */}
