@@ -5,8 +5,8 @@ export default function Index() {
   const { editors, loading, error } = useEditors();
   return (
     <div className="min-h-screen bg-white">
-      {/* Top Navigation Bar - Hidden on mobile */}
-      <div className="w-full bg-black h-[64px] items-center justify-end px-8 relative hidden lg:flex">
+      {/* Top Navigation Bar - Hidden */}
+      <div className="w-full bg-black h-[64px] items-center justify-end px-8 relative hidden">
         <div className="absolute top-[-30px] right-8 h-[30px] bg-black w-full"></div>
         <div className="text-white text-[12px] font-bold tracking-[1px] leading-normal">
           VN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ESSEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HIGHSPEED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WEBMAIL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VOLMOBIL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IMMO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ANZEIGER
@@ -15,8 +15,8 @@ export default function Index() {
 
       {/* Main Content with Sidebar Layout */}
       <div className="flex min-h-[calc(100vh-64px)] lg:min-h-[calc(100vh-64px)]">
-        {/* Left Sidebar - Hidden on mobile */}
-        <div className="w-[324px] bg-black-sidebar flex-shrink-0 hidden lg:block"></div>
+        {/* Left Sidebar - Hidden */}
+        <div className="w-[324px] bg-black-sidebar flex-shrink-0 hidden"></div>
 
         {/* Content Area */}
         <div className="flex-1 max-w-[1024px] bg-white px-4 sm:px-8 py-8 lg:py-[89px] mx-auto">
