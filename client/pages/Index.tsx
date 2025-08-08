@@ -1,67 +1,8 @@
-import { EditorCard, Editor } from "@/components/EditorCard";
-
-// Sample data that matches the Figma design
-const sampleEditors: Editor[] = [
-  {
-    id: "1",
-    name: "Marc Springer",
-    role: "chefredakteur",
-    imageUrl: "https://api.builder.io/api/v1/image/assets/TEMP/cb7a3f7d228c2b24d4a8c45f66083a1da2a07ffe?width=328",
-    socialLinks: {
-      twitter: "#",
-      linkedin: "#",
-      instagram: "#",
-      website: "#"
-    }
-  },
-  {
-    id: "2",
-    name: "Valentina Dotlić",
-    role: "Social Media managerin",
-    imageUrl: "https://api.builder.io/api/v1/image/assets/TEMP/7021d0c775fdb02063a284c3030f80e456a06ff4?width=328",
-    socialLinks: {
-      twitter: "#",
-      linkedin: "#",
-      instagram: "#"
-    }
-  },
-  {
-    id: "3",
-    name: "Pascal Pletsch",
-    role: "Head of breaking news",
-    imageUrl: "https://api.builder.io/api/v1/image/assets/TEMP/ead7e88a817cd0a2e35c7159c1a54190e4dde77d?width=328",
-    socialLinks: {
-      twitter: "#",
-      linkedin: "#",
-      instagram: "#"
-    }
-  },
-  {
-    id: "4",
-    name: "Valentina Dotlić",
-    role: "Social Media managerin",
-    imageUrl: "https://api.builder.io/api/v1/image/assets/TEMP/16659db56de7a68a5b111f3a193e8f4450bd3bae?width=328",
-    socialLinks: {
-      twitter: "#",
-      linkedin: "#",
-      instagram: "#"
-    }
-  },
-  {
-    id: "5",
-    name: "Marc Springer",
-    role: "chefredakteur",
-    imageUrl: "https://api.builder.io/api/v1/image/assets/TEMP/2dac341957f2f36f75d0f1fa351def59f7c6a588?width=328",
-    socialLinks: {
-      twitter: "#",
-      linkedin: "#",
-      instagram: "#",
-      website: "#"
-    }
-  }
-];
+import { EditorCard } from "@/components/EditorCard";
+import { useEditors } from "@/hooks/useEditors";
 
 export default function Index() {
+  const { editors, loading, error } = useEditors();
   return (
     <div className="min-h-screen bg-white">
       {/* Top Navigation Bar */}
