@@ -24,11 +24,21 @@ export function EditorCard({ editor }: EditorCardProps) {
     <div className="w-full max-w-[317px] lg:max-w-[410px] h-[172px] flex bg-white rounded-[4px] shadow-sm">
       {/* Profile Image */}
       <div className="w-[151px] lg:w-[164px] h-[172px] flex-shrink-0">
-        <img
-          src={editor.imageUrl}
-          alt={editor.name}
-          className="w-full h-full object-cover rounded-l-[4px]"
-        />
+        {editor.imageUrl ? (
+          <img
+            src={editor.imageUrl}
+            alt={editor.name || 'Editor'}
+            className="w-full h-full object-cover rounded-l-[4px]"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = '/placeholder.svg';
+            }}
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-200 rounded-l-[4px] flex items-center justify-center">
+            <span className="text-gray-500 text-sm">No Image</span>
+          </div>
+        )}
       </div>
 
       {/* Content Area */}
