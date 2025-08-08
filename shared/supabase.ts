@@ -59,7 +59,7 @@ export interface Editor {
 }
 
 // Utility function to transform database row to Editor type
-export function transformDbEditorToEditor(dbEditor: Database['public']['Tables']['editors']['Row']): Editor {
+export function transformDbEditorToEditor(dbEditor: Database['public']['Tables']['VOL.AT_Redaktionsliste_2025']['Row']): Editor {
   return {
     id: dbEditor.id,
     name: dbEditor.name,
