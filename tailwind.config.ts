@@ -57,6 +57,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Design system colors from Figma
+        "primary-white": "hsl(var(--primary-white))",
+        beige: "hsl(var(--beige))",
+        "primary-text": "hsl(var(--primary-text))",
+        "primary-yellow": "hsl(var(--primary-yellow))",
+        "black-sidebar": "hsl(var(--black-sidebar))",
       },
       borderRadius: {
         lg: "var(--radius)",
