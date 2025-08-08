@@ -83,7 +83,9 @@ export function useEditors(): UseEditorsReturn {
         return;
       }
 
+      console.log('Raw Supabase data:', data);
       const transformedEditors = data.map(transformDbEditorToEditor);
+      console.log('Transformed editors:', transformedEditors);
       setEditors(transformedEditors);
       console.log(`Fetched ${transformedEditors.length} editors from Supabase`);
 
