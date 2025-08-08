@@ -59,7 +59,7 @@ export function useEditors(): UseEditorsReturn {
       setLoading(true);
       setError(null);
 
-      if (!isUsingSupabase) {
+      if (!isUsingSupabase || !supabase) {
         // Use sample data if Supabase is not configured
         console.log('Supabase not configured, using sample data. Please connect Supabase to see real editors.');
         await new Promise(resolve => setTimeout(resolve, 500)); // Simulate loading
