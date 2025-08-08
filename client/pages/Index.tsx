@@ -54,8 +54,8 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Right Sidebar - Hidden on mobile */}
-        <div className="w-[324px] bg-black-sidebar flex-shrink-0 hidden lg:block"></div>
+        {/* Right Sidebar - Hidden */}
+        <div className="w-[324px] bg-black-sidebar flex-shrink-0 hidden"></div>
       </div>
     </div>
   );
