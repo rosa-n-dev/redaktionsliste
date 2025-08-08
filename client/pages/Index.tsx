@@ -2,7 +2,7 @@ import { EditorCard } from "@/components/EditorCard";
 import { useEditors } from "@/hooks/useEditors";
 
 export default function Index() {
-  const { editors, loading, error } = useEditors();
+  const { editors, loading, error, isUsingSupabase } = useEditors();
   return (
     <div className="min-h-screen bg-white">
       {/* Top Navigation Bar - Hidden */}
