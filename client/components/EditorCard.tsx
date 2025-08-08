@@ -56,7 +56,7 @@ export function EditorCard({ editor }: EditorCardProps) {
 
         {/* Social Links */}
         <div className="absolute bottom-[11px] right-[14px] flex gap-[9px] lg:gap-[9.846px]">
-          {editor.socialLinks.twitter && (
+          {editor.socialLinks?.twitter && editor.socialLinks.twitter !== '#' && (
             <a
               href={editor.socialLinks.twitter}
               target="_blank"
@@ -66,7 +66,7 @@ export function EditorCard({ editor }: EditorCardProps) {
               <Twitter className="w-[13.432px] lg:w-[14.61px] h-[13.729px] lg:h-[14.932px] text-black" />
             </a>
           )}
-          {editor.socialLinks.linkedin && (
+          {editor.socialLinks?.linkedin && editor.socialLinks.linkedin !== '#' && (
             <a
               href={editor.socialLinks.linkedin}
               target="_blank"
@@ -76,7 +76,7 @@ export function EditorCard({ editor }: EditorCardProps) {
               <Linkedin className="w-[14.676px] lg:w-[15.963px] h-[13.611px] lg:h-[14.804px] text-black" />
             </a>
           )}
-          {editor.socialLinks.instagram && (
+          {editor.socialLinks?.instagram && editor.socialLinks.instagram !== '#' && (
             <a
               href={editor.socialLinks.instagram}
               target="_blank"
@@ -86,7 +86,7 @@ export function EditorCard({ editor }: EditorCardProps) {
               <Instagram className="w-[13.582px] lg:w-[14.773px] h-[13.576px] lg:h-[14.766px] text-black" />
             </a>
           )}
-          {editor.socialLinks.website && (
+          {editor.socialLinks?.website && editor.socialLinks.website !== '#' && (
             <a
               href={editor.socialLinks.website}
               target="_blank"
