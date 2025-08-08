@@ -42,14 +42,14 @@ export function EditorCard({ editor }: EditorCardProps) {
             className="text-primary-text font-bold text-[20px] lg:text-[25px] leading-[98%] tracking-[-0.4px] lg:tracking-[-0.5px]"
             style={{ fontFamily: 'Greta Sans Pro, -apple-system, Roboto, Helvetica, sans-serif' }}
           >
-            {editor.name}
+            {editor.name || 'Name not available'}
           </h3>
           <div className="inline-flex">
             <span
               className="bg-primary-yellow px-[10px] py-[5px] rounded-[4px] text-primary-text text-[8px] lg:text-[10px] font-black uppercase leading-normal text-center"
               style={{ fontFamily: 'Inter, -apple-system, Roboto, Helvetica, sans-serif' }}
             >
-              {editor.role}
+              {editor.role || 'Role not available'}
             </span>
           </div>
         </div>
