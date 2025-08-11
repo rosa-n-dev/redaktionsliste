@@ -58,23 +58,32 @@ export interface Editor {
   };
 }
 
+// Import the image mapping function
+import { getEditorImageUrl } from '../client/lib/imageMapping';
+
 // Utility function to transform database row to Editor type
 export function transformDbEditorToEditor(dbEditor: any): Editor {
   console.log('Transforming editor:', dbEditor);
-  console.log('Image URL from database:', dbEditor.image_url);
 
-  // Ensure we use the actual image_url from Supabase storage
-  let imageUrl = dbEditor.image_url || dbEditor.imageUrl || dbEditor.photo_url || dbEditor.avatar_url;
+  const editorName = dbEditor.name || dbEditor.Name || dbEditor.vorname || dbEditor.Vorname || dbEditor.fullname || 'Name not available';
 
-  // Clean up the image URL if it exists
-  if (imageUrl) {
-    imageUrl = imageUrl.trim();
-    console.log('Cleaned image URL:', imageUrl);
+  // Use Supabase storage URL mapping instead of database image_url
+  const mappedImageUrl = getEditorImageUrl(editorName);
+
+  // Fallback to database URL if no mapping exists
+  let imageUrl = mappedImageUrl;
+  if (!imageUrl) {
+    imageUrl = dbEditor.image_url || dbEditor.imageUrl || dbEditor.photo_url || dbEditor.avatar_url;
+    if (imageUrl) {
+      imageUrl = imageUrl.trim();
+    }
   }
+
+  console.log(`Image URL for ${editorName}: ${imageUrl}`);
 
   return {
     id: dbEditor.id || `editor-${Math.random()}`,
-    name: dbEditor.name || dbEditor.Name || dbEditor.vorname || dbEditor.Vorname || dbEditor.fullname || 'Name not available',
+    name: editorName,
     role: dbEditor.Title || dbEditor.title || dbEditor.role || dbEditor.Role || dbEditor.position || dbEditor.Position || 'Role not available',
     imageUrl: imageUrl || '', // Don't use placeholder as fallback, let component handle it
     socialLinks: {
