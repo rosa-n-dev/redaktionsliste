@@ -23,7 +23,7 @@ export interface Database {
           Title: string;  // Using actual column name from database
           image_url: string;
           email?: string | null;
-          "Artikel zu Person"?: string | null;  // Using actual column name with quotes for special characters
+          "Artikel zur Person"?: string | null;  // Using actual column name with quotes for special characters
           twitter_url?: string | null;
           linkedin_url?: string | null;
           instagram_url?: string | null;
@@ -37,7 +37,7 @@ export interface Database {
           Title?: string;  // Using actual column name from database
           image_url?: string;
           email?: string | null;
-          "Artikel zu Person"?: string | null;  // Using actual column name with quotes for special characters
+          "Artikel zur Person"?: string | null;  // Using actual column name with quotes for special characters
           twitter_url?: string | null;
           linkedin_url?: string | null;
           instagram_url?: string | null;
@@ -118,7 +118,7 @@ export function transformDbEditorToEditor(dbEditor: any): Editor {
     role: dbEditor.Title || dbEditor.title || dbEditor.role || dbEditor.Role || dbEditor.position || dbEditor.Position || 'Role not available',
     imageUrl: imageUrl || '', // Don't use placeholder as fallback, let component handle it
     email: dbEditor.email || undefined,
-    articles: dbEditor["Artikel zu Person"] || dbEditor.articles || undefined,
+    articles: dbEditor["Artikel zur Person"] || dbEditor.articles || undefined,
     socialLinks: {
       twitter: dbEditor.twitter_url || dbEditor.twitter || undefined,
       linkedin: dbEditor.linkedin_url || dbEditor.linkedin || undefined,
