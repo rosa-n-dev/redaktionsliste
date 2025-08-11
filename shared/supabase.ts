@@ -61,12 +61,16 @@ export interface Editor {
 // Utility function to transform database row to Editor type
 export function transformDbEditorToEditor(dbEditor: any): Editor {
   console.log('Transforming editor:', dbEditor);
+  console.log('Image URL from database:', dbEditor.image_url);
+
+  // Ensure we use the actual image_url from Supabase storage
+  const imageUrl = dbEditor.image_url || dbEditor.imageUrl || dbEditor.photo_url || dbEditor.avatar_url;
 
   return {
     id: dbEditor.id || `editor-${Math.random()}`,
     name: dbEditor.name || dbEditor.Name || dbEditor.vorname || dbEditor.Vorname || dbEditor.fullname || 'Name not available',
     role: dbEditor.Title || dbEditor.title || dbEditor.role || dbEditor.Role || dbEditor.position || dbEditor.Position || 'Role not available',
-    imageUrl: dbEditor.image_url || dbEditor.imageUrl || dbEditor.photo_url || dbEditor.avatar_url || '/placeholder.svg',
+    imageUrl: imageUrl || '', // Don't use placeholder as fallback, let component handle it
     socialLinks: {
       twitter: dbEditor.twitter_url || dbEditor.twitter || undefined,
       linkedin: dbEditor.linkedin_url || dbEditor.linkedin || undefined,
