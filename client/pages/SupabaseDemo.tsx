@@ -32,8 +32,8 @@ export default function SupabaseDemo() {
       query: `SELECT * FROM "${tableName}" LIMIT 5;`
     },
     {
-      name: 'Test specific columns',
-      query: `SELECT id, name, role FROM "${tableName}" LIMIT 3;`
+      name: 'Test name and title columns',
+      query: `SELECT id, name, Title, image_url FROM "${tableName}" LIMIT 3;`
     },
     {
       name: 'Test social media columns',
