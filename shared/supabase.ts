@@ -9,7 +9,7 @@ export interface Database {
           Title: string;  // Using actual column name from database
           image_url: string;
           email: string | null;
-          "Artikel zu Person": string | null;  // URL to articles page
+          "Artikel zur Person": string | null;  // URL to articles page
           twitter_url: string | null;
           linkedin_url: string | null;
           instagram_url: string | null;
