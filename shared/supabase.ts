@@ -6,7 +6,7 @@ export interface Database {
         Row: {
           id: string;
           name: string;
-          role: string;
+          Title: string;  // Using actual column name from database
           image_url: string;
           twitter_url: string | null;
           linkedin_url: string | null;
@@ -18,7 +18,7 @@ export interface Database {
         Insert: {
           id?: string;
           name: string;
-          role: string;
+          Title: string;  // Using actual column name from database
           image_url: string;
           twitter_url?: string | null;
           linkedin_url?: string | null;
@@ -30,7 +30,7 @@ export interface Database {
         Update: {
           id?: string;
           name?: string;
-          role?: string;
+          Title?: string;  // Using actual column name from database
           image_url?: string;
           twitter_url?: string | null;
           linkedin_url?: string | null;
