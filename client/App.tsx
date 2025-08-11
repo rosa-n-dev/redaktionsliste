@@ -9,6 +9,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import SupabaseDemo from "./pages/SupabaseDemo";
 import NotFound from "./pages/NotFound";
+import Embed from './pages/Embed';
+
+<Route path="/embed" element={<Embed />} />
+
 
 const queryClient = new QueryClient();
 
