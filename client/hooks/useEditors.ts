@@ -102,11 +102,11 @@ export function useEditors(): UseEditorsReturn {
       if (result1.error) {
         console.log('Error with SELECT *:', result1.error);
 
-        // Second attempt: Try specific columns with correct column names
+        // Second attempt: Try specific columns with correct column names including email and articles
         console.log('Attempting to fetch specific columns...');
         const result2 = await supabase
           .from('VOL.AT_Redaktionsliste_2025')
-          .select('id, name, Title, image_url, twitter_url, linkedin_url, instagram_url, website_url, created_at')
+          .select('id, name, Title, image_url, email, "Artikel zu Person", twitter_url, linkedin_url, instagram_url, website_url, created_at')
           .order('created_at', { ascending: true });
 
         if (result2.error) {
@@ -116,7 +116,7 @@ export function useEditors(): UseEditorsReturn {
           console.log('Attempting to fetch minimal columns...');
           const result3 = await supabase
             .from('VOL.AT_Redaktionsliste_2025')
-            .select('id, name, Title, image_url')
+            .select('id, name, Title, image_url, email, "Artikel zu Person"')
             .limit(10);
 
           data = result3.data;
