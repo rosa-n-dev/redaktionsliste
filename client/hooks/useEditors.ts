@@ -24,7 +24,7 @@ const sampleEditors: Editor[] = [
     role: "Social Media managerin",
     imageUrl: "https://api.builder.io/api/v1/image/assets/TEMP/7021d0c775fdb02063a284c3030f80e456a06ff4?width=328",
     email: "valentina.dotlic@vol.at",
-    articles: "Social Media, Online Marketing, Community Management",
+    articles: "https://vol.at/autor/valentina-dotlic",
     socialLinks: {
       twitter: "https://twitter.com/valentinadotlic",
       linkedin: "https://linkedin.com/in/valentinadotlic",
