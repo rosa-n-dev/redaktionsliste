@@ -106,6 +106,13 @@ export function useEditors(): UseEditorsReturn {
       }
 
       console.log('Raw Supabase data:', data);
+      console.log('Data length:', data?.length);
+
+      if (data && data.length > 0) {
+        console.log('First row sample:', data[0]);
+        console.log('Available columns:', Object.keys(data[0]));
+      }
+
       const transformedEditors = data.map(transformDbEditorToEditor);
       console.log('Transformed editors:', transformedEditors);
       setEditors(transformedEditors);
