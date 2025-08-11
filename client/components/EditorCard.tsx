@@ -52,8 +52,8 @@ export function EditorCard({ editor }: EditorCardProps) {
         className="flex-1 h-[172px] rounded-r-[4px] relative px-[16px] lg:px-[30px] py-[17px]"
         style={{ backgroundColor: 'rgba(242, 241, 234, 0.95)' }}
       >
-        {/* Name and Role */}
-        <div className="flex flex-col gap-[5px] mb-[44px] lg:mb-[64px]">
+        {/* Name, Role, Email and Articles */}
+        <div className="flex flex-col gap-[5px] mb-[30px] lg:mb-[44px]">
           <h3
             className="text-primary-text font-bold text-[20px] lg:text-[25px] leading-[98%] tracking-[-0.4px] lg:tracking-[-0.5px]"
             style={{ fontFamily: 'Greta Sans Pro, -apple-system, Roboto, Helvetica, sans-serif' }}
@@ -68,6 +68,31 @@ export function EditorCard({ editor }: EditorCardProps) {
               {editor.role || 'Role not available'}
             </span>
           </div>
+
+          {/* Email */}
+          {editor.email && (
+            <div className="mt-2">
+              <a
+                href={`mailto:${editor.email}`}
+                className="text-primary-text text-[11px] lg:text-[12px] hover:underline"
+                style={{ fontFamily: 'Inter, -apple-system, Roboto, Helvetica, sans-serif' }}
+              >
+                {editor.email}
+              </a>
+            </div>
+          )}
+
+          {/* Articles */}
+          {editor.articles && (
+            <div className="mt-1">
+              <p
+                className="text-primary-text text-[10px] lg:text-[11px] leading-tight"
+                style={{ fontFamily: 'Inter, -apple-system, Roboto, Helvetica, sans-serif' }}
+              >
+                <span className="font-medium">Artikel:</span> {editor.articles}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Social Links */}
