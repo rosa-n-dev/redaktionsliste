@@ -117,6 +117,8 @@ export function transformDbEditorToEditor(dbEditor: any): Editor {
     name: editorName,
     role: dbEditor.Title || dbEditor.title || dbEditor.role || dbEditor.Role || dbEditor.position || dbEditor.Position || 'Role not available',
     imageUrl: imageUrl || '', // Don't use placeholder as fallback, let component handle it
+    email: dbEditor.email || undefined,
+    articles: dbEditor["Artikel zu Person"] || dbEditor.articles || undefined,
     socialLinks: {
       twitter: dbEditor.twitter_url || dbEditor.twitter || undefined,
       linkedin: dbEditor.linkedin_url || dbEditor.linkedin || undefined,
