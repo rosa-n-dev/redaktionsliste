@@ -22,14 +22,18 @@ export function EditorCard({ editor }: EditorCardProps) {
     <div className="w-full max-w-[317px] lg:max-w-[410px] h-[172px] flex bg-white rounded-[4px] shadow-sm">
       {/* Profile Image */}
       <div className="w-[151px] lg:w-[164px] h-[172px] flex-shrink-0">
-        {editor.imageUrl ? (
+        {editor.imageUrl && editor.imageUrl.trim() !== '' ? (
           <img
             src={editor.imageUrl}
             alt={editor.name || 'Editor'}
             className="w-full h-full object-cover rounded-l-[4px]"
             onError={(e) => {
+              console.log('Image failed to load:', editor.imageUrl);
               const target = e.target as HTMLImageElement;
               target.src = '/placeholder.svg';
+            }}
+            onLoad={() => {
+              console.log('Image loaded successfully:', editor.imageUrl);
             }}
           />
         ) : (
