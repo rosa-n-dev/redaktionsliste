@@ -233,6 +233,28 @@ export default function SupabaseDemo() {
           </div>
         )}
 
+        {/* RLS Policy Suggestions */}
+        <div className="bg-white rounded-lg shadow-md p-6 mt-6">
+          <h2 className="text-xl font-semibold mb-4">RLS Policy Suggestions</h2>
+          <div className="space-y-4">
+            <p className="text-gray-700">If you're having issues with RLS, try adding this policy to your table:</p>
+            <div className="bg-gray-100 p-4 rounded-md">
+              <code className="text-sm">
+                {`-- Allow anonymous users to read all data
+CREATE POLICY "Allow anonymous read access" ON "${tableName}"
+FOR SELECT USING (true);
+
+-- Or allow authenticated users only
+CREATE POLICY "Allow authenticated read access" ON "${tableName}"
+FOR SELECT USING (auth.role() = 'authenticated');`}
+              </code>
+            </div>
+            <p className="text-sm text-gray-600">
+              Run these in your Supabase SQL editor to allow read access to your table.
+            </p>
+          </div>
+        </div>
+
         {/* Environment Variables Info */}
         <div className="bg-white rounded-lg shadow-md p-6 mt-6">
           <h2 className="text-xl font-semibold mb-4">Environment Variables</h2>
