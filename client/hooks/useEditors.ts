@@ -9,6 +9,8 @@ const sampleEditors: Editor[] = [
     name: "Marc Springer",
     role: "chefredakteur",
     imageUrl: "https://api.builder.io/api/v1/image/assets/TEMP/cb7a3f7d228c2b24d4a8c45f66083a1da2a07ffe?width=328",
+    email: "marc.springer@vol.at",
+    articles: "Politik, Wirtschaft, Chefredaktion",
     socialLinks: {
       twitter: "https://twitter.com/marcspringer",
       linkedin: "https://linkedin.com/in/marcspringer",
