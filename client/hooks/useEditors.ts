@@ -89,11 +89,46 @@ export function useEditors(): UseEditorsReturn {
         return;
       }
 
-      // Fetch from Supabase table: VOL.AT_Redaktionsliste_2025
-      const { data, error } = await supabase
+      // Try different approaches to fetch data from RLS-enabled table
+      let data, error;
+
+      // First attempt: Try to fetch all columns
+      console.log('Attempting to fetch all columns...');
+      const result1 = await supabase
         .from('VOL.AT_Redaktionsliste_2025')
         .select('*')
         .order('created_at', { ascending: true });
+
+      if (result1.error) {
+        console.log('Error with SELECT *:', result1.error);
+
+        // Second attempt: Try specific columns
+        console.log('Attempting to fetch specific columns...');
+        const result2 = await supabase
+          .from('VOL.AT_Redaktionsliste_2025')
+          .select('id, name, role, image_url, twitter_url, linkedin_url, instagram_url, website_url, created_at')
+          .order('created_at', { ascending: true });
+
+        if (result2.error) {
+          console.log('Error with specific columns:', result2.error);
+
+          // Third attempt: Try minimal columns
+          console.log('Attempting to fetch minimal columns...');
+          const result3 = await supabase
+            .from('VOL.AT_Redaktionsliste_2025')
+            .select('id, name, role')
+            .limit(10);
+
+          data = result3.data;
+          error = result3.error;
+        } else {
+          data = result2.data;
+          error = result2.error;
+        }
+      } else {
+        data = result1.data;
+        error = result1.error;
+      }
 
       if (error) {
         console.error('Supabase error:', error);
