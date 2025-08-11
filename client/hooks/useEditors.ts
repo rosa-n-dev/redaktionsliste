@@ -36,6 +36,8 @@ const sampleEditors: Editor[] = [
     name: "Pascal Pletsch",
     role: "Head of breaking news",
     imageUrl: "https://api.builder.io/api/v1/image/assets/TEMP/ead7e88a817cd0a2e35c7159c1a54190e4dde77d?width=328",
+    email: "pascal.pletsch@vol.at",
+    articles: "Breaking News, Eilmeldungen, Live-Ticker",
     socialLinks: {
       twitter: "https://twitter.com/pascalpletsch",
       linkedin: "https://linkedin.com/in/pascalpletsch",
