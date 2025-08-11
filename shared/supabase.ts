@@ -65,7 +65,7 @@ export function transformDbEditorToEditor(dbEditor: any): Editor {
   return {
     id: dbEditor.id || `editor-${Math.random()}`,
     name: dbEditor.name || dbEditor.Name || dbEditor.vorname || dbEditor.Vorname || dbEditor.fullname || 'Name not available',
-    role: dbEditor.role || dbEditor.Role || dbEditor.position || dbEditor.Position || dbEditor.title || 'Role not available',
+    role: dbEditor.Title || dbEditor.title || dbEditor.role || dbEditor.Role || dbEditor.position || dbEditor.Position || 'Role not available',
     imageUrl: dbEditor.image_url || dbEditor.imageUrl || dbEditor.photo_url || dbEditor.avatar_url || '/placeholder.svg',
     socialLinks: {
       twitter: dbEditor.twitter_url || dbEditor.twitter || undefined,
