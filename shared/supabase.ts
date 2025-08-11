@@ -64,7 +64,13 @@ export function transformDbEditorToEditor(dbEditor: any): Editor {
   console.log('Image URL from database:', dbEditor.image_url);
 
   // Ensure we use the actual image_url from Supabase storage
-  const imageUrl = dbEditor.image_url || dbEditor.imageUrl || dbEditor.photo_url || dbEditor.avatar_url;
+  let imageUrl = dbEditor.image_url || dbEditor.imageUrl || dbEditor.photo_url || dbEditor.avatar_url;
+
+  // Clean up the image URL if it exists
+  if (imageUrl) {
+    imageUrl = imageUrl.trim();
+    console.log('Cleaned image URL:', imageUrl);
+  }
 
   return {
     id: dbEditor.id || `editor-${Math.random()}`,
