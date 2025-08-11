@@ -69,13 +69,13 @@ const SUPABASE_STORAGE_BASE_URL = 'https://dayiaqaufaorxqsuzgxn.supabase.co/stor
 
 // Mapping of editor names to their image file names
 const IMAGE_MAPPING: { [key: string]: string } = {
-  'Marc Springer': 'PP_Marc_Springer.jpg',
-  'Pascal Pletsch': 'PP_Pascal_Pletsch.jpg',
-  'Martin Suppersberger': 'PP_Martin_Suppersberger.jpg',
-  'Larissa Hermann': 'PP_Larissa_Hermann.jpg',
-  'Valentina Dotlić': 'PP_Valentina_Dotlic.jpg', // Note: no special characters in filename
-  'Paloma Mock': 'PP_Paloma_Mock.jpg',
-  'Mirjam Mayer': 'PP_Mirjam_Mayer.jpg',
+  'Marc Springer': 'PP_Marc_Springer.JPG',
+  'Pascal Pletsch': 'PP_Pascal_Pletsch.JPG',
+  'Martin Suppersberger': 'PP_Martin_Suppersberger.JPG',
+  'Larissa Hermann': 'PP_Larissa_Hermann.JPG',
+  'Valentina Dotlić': 'PP_Valentina_Dotlic.JPG', // Note: no special characters in filename
+  'Paloma Mock': 'PP_Paloma_Mock.JPG',
+  'Mirjam Mayer': 'PP_Mirjam_Mayer.JPG',
 };
 
 // Function to get Supabase storage URL for an editor
