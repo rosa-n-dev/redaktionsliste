@@ -59,17 +59,19 @@ export interface Editor {
 }
 
 // Utility function to transform database row to Editor type
-export function transformDbEditorToEditor(dbEditor: Database['public']['Tables']['VOL.AT_Redaktionsliste_2025']['Row']): Editor {
+export function transformDbEditorToEditor(dbEditor: any): Editor {
+  console.log('Transforming editor:', dbEditor);
+
   return {
-    id: dbEditor.id,
-    name: dbEditor.name,
-    role: dbEditor.role,
-    imageUrl: dbEditor.image_url,
+    id: dbEditor.id || `editor-${Math.random()}`,
+    name: dbEditor.name || dbEditor.Name || dbEditor.vorname || dbEditor.Vorname || dbEditor.fullname || 'Name not available',
+    role: dbEditor.role || dbEditor.Role || dbEditor.position || dbEditor.Position || dbEditor.title || 'Role not available',
+    imageUrl: dbEditor.image_url || dbEditor.imageUrl || dbEditor.photo_url || dbEditor.avatar_url || '/placeholder.svg',
     socialLinks: {
-      twitter: dbEditor.twitter_url || undefined,
-      linkedin: dbEditor.linkedin_url || undefined,
-      instagram: dbEditor.instagram_url || undefined,
-      website: dbEditor.website_url || undefined,
+      twitter: dbEditor.twitter_url || dbEditor.twitter || undefined,
+      linkedin: dbEditor.linkedin_url || dbEditor.linkedin || undefined,
+      instagram: dbEditor.instagram_url || dbEditor.instagram || undefined,
+      website: dbEditor.website_url || dbEditor.website || undefined,
     },
   };
 }
