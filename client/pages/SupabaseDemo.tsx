@@ -9,18 +9,22 @@ export default function SupabaseDemo() {
   const [customQuery, setCustomQuery] = useState('');
   const [tableName, setTableName] = useState('VOL.AT_Redaktionsliste_2025');
 
-  // Common test queries
+  // Common test queries including RLS-specific ones
   const testQueries = [
+    {
+      name: 'Check RLS policies',
+      query: `SELECT schemaname, tablename, policyname, permissive, roles, cmd, qual FROM pg_policies WHERE tablename = '${tableName}';`
+    },
     {
       name: 'List all tables',
       query: `SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';`
     },
     {
-      name: 'Describe table structure', 
+      name: 'Describe table structure',
       query: `SELECT column_name, data_type, is_nullable FROM information_schema.columns WHERE table_name = '${tableName}' ORDER BY ordinal_position;`
     },
     {
-      name: 'Count rows',
+      name: 'Count rows (with RLS)',
       query: `SELECT COUNT(*) as total_rows FROM "${tableName}";`
     },
     {
@@ -28,8 +32,12 @@ export default function SupabaseDemo() {
       query: `SELECT * FROM "${tableName}" LIMIT 5;`
     },
     {
-      name: 'Check specific columns',
-      query: `SELECT id, name, role, image_url, linkedin_url, instagram_url, twitter_url, website_url FROM "${tableName}" LIMIT 3;`
+      name: 'Test specific columns',
+      query: `SELECT id, name, role FROM "${tableName}" LIMIT 3;`
+    },
+    {
+      name: 'Test social media columns',
+      query: `SELECT id, linkedin_url, instagram_url, twitter_url, website_url FROM "${tableName}" LIMIT 3;`
     }
   ];
 
