@@ -18,7 +18,7 @@ const sampleEditors: Editor[] = [
   },
   {
     id: "sample-2",
-    name: "Valentina Dotlić",
+    name: "Valentina Dotli��",
     role: "Social Media managerin",
     imageUrl: "https://api.builder.io/api/v1/image/assets/TEMP/7021d0c775fdb02063a284c3030f80e456a06ff4?width=328",
     socialLinks: {
@@ -102,11 +102,11 @@ export function useEditors(): UseEditorsReturn {
       if (result1.error) {
         console.log('Error with SELECT *:', result1.error);
 
-        // Second attempt: Try specific columns
+        // Second attempt: Try specific columns with correct column names
         console.log('Attempting to fetch specific columns...');
         const result2 = await supabase
           .from('VOL.AT_Redaktionsliste_2025')
-          .select('id, name, role, image_url, twitter_url, linkedin_url, instagram_url, website_url, created_at')
+          .select('id, name, Title, image_url, twitter_url, linkedin_url, instagram_url, website_url, created_at')
           .order('created_at', { ascending: true });
 
         if (result2.error) {
@@ -116,7 +116,7 @@ export function useEditors(): UseEditorsReturn {
           console.log('Attempting to fetch minimal columns...');
           const result3 = await supabase
             .from('VOL.AT_Redaktionsliste_2025')
-            .select('id, name, role')
+            .select('id, name, Title, image_url')
             .limit(10);
 
           data = result3.data;
