@@ -8,6 +8,8 @@ export interface Database {
           name: string;
           Title: string;  // Using actual column name from database
           image_url: string;
+          email: string | null;
+          "Artikel zu Person": string | null;  // Using actual column name with quotes for special characters
           twitter_url: string | null;
           linkedin_url: string | null;
           instagram_url: string | null;
@@ -20,6 +22,8 @@ export interface Database {
           name: string;
           Title: string;  // Using actual column name from database
           image_url: string;
+          email?: string | null;
+          "Artikel zu Person"?: string | null;  // Using actual column name with quotes for special characters
           twitter_url?: string | null;
           linkedin_url?: string | null;
           instagram_url?: string | null;
@@ -32,6 +36,8 @@ export interface Database {
           name?: string;
           Title?: string;  // Using actual column name from database
           image_url?: string;
+          email?: string | null;
+          "Artikel zu Person"?: string | null;  // Using actual column name with quotes for special characters
           twitter_url?: string | null;
           linkedin_url?: string | null;
           instagram_url?: string | null;
