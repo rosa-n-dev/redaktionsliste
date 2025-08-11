@@ -33,7 +33,7 @@ export default function SupabaseDemo() {
     },
     {
       name: 'Test name and title columns',
-      query: `SELECT id, name, Title, image_url FROM "${tableName}" LIMIT 3;`
+      query: `SELECT id, name, Title, image_url, email, "Artikel zu Person" FROM "${tableName}" LIMIT 3;`
     },
     {
       name: 'Test social media columns',
