@@ -5,6 +5,8 @@ export interface Editor {
   name: string;
   role: string;
   imageUrl: string;
+  email?: string;
+  articles?: string; // "Artikel zu Person"
   socialLinks: {
     twitter?: string;
     linkedin?: string;
