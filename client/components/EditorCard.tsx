@@ -1,4 +1,4 @@
-import { Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Twitter, Linkedin, Instagram } from "lucide-react";
 
 export interface Editor {
   id: string;
@@ -20,25 +20,30 @@ interface EditorCardProps {
 }
 
 export function EditorCard({ editor }: EditorCardProps) {
-  console.log('EditorCard - Image URL:', editor.imageUrl, 'for editor:', editor.name);
+  console.log(
+    "EditorCard - Image URL:",
+    editor.imageUrl,
+    "for editor:",
+    editor.name,
+  );
 
   return (
     <div className="w-full max-w-[317px] lg:max-w-[410px] h-[172px] flex bg-white rounded-[4px] shadow-sm">
       {/* Profile Image */}
       <div className="w-[151px] lg:w-[164px] h-[172px] flex-shrink-0">
-        {editor.imageUrl && editor.imageUrl.trim() !== '' ? (
+        {editor.imageUrl && editor.imageUrl.trim() !== "" ? (
           <img
             src={editor.imageUrl}
-            alt={editor.name || 'Editor'}
+            alt={editor.name || "Editor"}
             className="w-full h-full object-cover rounded-l-[4px]"
-            style={{ objectPosition: '50% 25%' }}
+            style={{ objectPosition: "50% 25%" }}
             onError={(e) => {
-              console.log('Image failed to load:', editor.imageUrl);
+              console.log("Image failed to load:", editor.imageUrl);
               const target = e.target as HTMLImageElement;
-              target.src = '/placeholder.svg';
+              target.src = "/placeholder.svg";
             }}
             onLoad={() => {
-              console.log('Image loaded successfully:', editor.imageUrl);
+              console.log("Image loaded successfully:", editor.imageUrl);
             }}
           />
         ) : (
@@ -51,22 +56,28 @@ export function EditorCard({ editor }: EditorCardProps) {
       {/* Content Area */}
       <div
         className="flex-1 h-[172px] rounded-r-[4px] relative px-[16px] lg:px-[30px] py-[17px]"
-        style={{ backgroundColor: 'rgba(242, 241, 234, 0.95)' }}
+        style={{ backgroundColor: "rgba(242, 241, 234, 0.95)" }}
       >
         {/* Name, Role, Email and Articles */}
         <div className="flex flex-col gap-[5px] mb-[30px] lg:mb-[44px]">
           <h3
             className="text-primary-text font-bold text-[20px] lg:text-[25px] leading-[98%] tracking-[-0.4px] lg:tracking-[-0.5px]"
-            style={{ fontFamily: 'Greta Sans Pro, -apple-system, Roboto, Helvetica, sans-serif' }}
+            style={{
+              fontFamily:
+                "Greta Sans Pro, -apple-system, Roboto, Helvetica, sans-serif",
+            }}
           >
-            {editor.name || 'Name not available'}
+            {editor.name || "Name not available"}
           </h3>
           <div className="inline-flex">
             <span
               className="bg-primary-yellow px-[10px] py-[5px] rounded-[4px] text-primary-text text-[8px] lg:text-[10px] font-black uppercase leading-normal text-center"
-              style={{ fontFamily: 'Inter, -apple-system, Roboto, Helvetica, sans-serif' }}
+              style={{
+                fontFamily:
+                  "Inter, -apple-system, Roboto, Helvetica, sans-serif",
+              }}
             >
-              {editor.role || 'Role not available'}
+              {editor.role || "Role not available"}
             </span>
           </div>
 
@@ -76,7 +87,10 @@ export function EditorCard({ editor }: EditorCardProps) {
               <a
                 href={`mailto:${editor.email}`}
                 className="text-primary-text text-[11px] lg:text-[12px] hover:underline"
-                style={{ fontFamily: 'Inter, -apple-system, Roboto, Helvetica, sans-serif' }}
+                style={{
+                  fontFamily:
+                    "Inter, -apple-system, Roboto, Helvetica, sans-serif",
+                }}
               >
                 {editor.email}
               </a>
@@ -91,7 +105,10 @@ export function EditorCard({ editor }: EditorCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-3 py-1 bg-gray-800 text-white text-[10px] lg:text-[11px] font-medium rounded-[3px] hover:bg-gray-700 transition-colors"
-                style={{ fontFamily: 'Inter, -apple-system, Roboto, Helvetica, sans-serif' }}
+                style={{
+                  fontFamily:
+                    "Inter, -apple-system, Roboto, Helvetica, sans-serif",
+                }}
               >
                 Artikel ansehen
                 <svg
@@ -114,46 +131,50 @@ export function EditorCard({ editor }: EditorCardProps) {
 
         {/* Social Links */}
         <div className="absolute bottom-[11px] right-[14px] flex gap-[9px] lg:gap-[9.846px]">
-          {editor.socialLinks?.twitter && editor.socialLinks.twitter !== '#' && (
-            <a
-              href={editor.socialLinks.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-[22.632px] lg:w-[24.615px] h-[22.632px] lg:h-[24.615px] bg-white rounded-[11.316px] lg:rounded-[12.308px] flex items-center justify-center p-[4.526px] lg:p-[4.923px]"
-            >
-              <Twitter className="w-[13.432px] lg:w-[14.61px] h-[13.729px] lg:h-[14.932px] text-black" />
-            </a>
-          )}
-          {editor.socialLinks?.linkedin && editor.socialLinks.linkedin !== '#' && (
-            <a
-              href={editor.socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-[22.632px] lg:w-[24.615px] h-[22.632px] lg:h-[24.615px] bg-white rounded-[11.316px] lg:rounded-[12.308px] flex items-center justify-center p-[4.526px] lg:p-[4.923px]"
-            >
-              <Linkedin className="w-[14.676px] lg:w-[15.963px] h-[13.611px] lg:h-[14.804px] text-black" />
-            </a>
-          )}
-          {editor.socialLinks?.instagram && editor.socialLinks.instagram !== '#' && (
-            <a
-              href={editor.socialLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-[22.632px] lg:w-[24.615px] h-[22.632px] lg:h-[24.615px] bg-white rounded-[11.316px] lg:rounded-[12.308px] flex items-center justify-center p-[4.526px] lg:p-[4.923px]"
-            >
-              <Instagram className="w-[13.582px] lg:w-[14.773px] h-[13.576px] lg:h-[14.766px] text-black" />
-            </a>
-          )}
-          {editor.socialLinks?.website && editor.socialLinks.website !== '#' && (
-            <a
-              href={editor.socialLinks.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-[22.632px] lg:w-[24.615px] h-[22.632px] lg:h-[24.615px] bg-white rounded-[11.316px] lg:rounded-[12.308px] flex items-center justify-center p-[4.526px] lg:p-[4.923px]"
-            >
-              <div className="w-[14px] lg:w-[16.975px] h-[12px] lg:h-[14.995px] bg-black rounded-sm"></div>
-            </a>
-          )}
+          {editor.socialLinks?.twitter &&
+            editor.socialLinks.twitter !== "#" && (
+              <a
+                href={editor.socialLinks.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-[22.632px] lg:w-[24.615px] h-[22.632px] lg:h-[24.615px] bg-white rounded-[11.316px] lg:rounded-[12.308px] flex items-center justify-center p-[4.526px] lg:p-[4.923px]"
+              >
+                <Twitter className="w-[13.432px] lg:w-[14.61px] h-[13.729px] lg:h-[14.932px] text-black" />
+              </a>
+            )}
+          {editor.socialLinks?.linkedin &&
+            editor.socialLinks.linkedin !== "#" && (
+              <a
+                href={editor.socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-[22.632px] lg:w-[24.615px] h-[22.632px] lg:h-[24.615px] bg-white rounded-[11.316px] lg:rounded-[12.308px] flex items-center justify-center p-[4.526px] lg:p-[4.923px]"
+              >
+                <Linkedin className="w-[14.676px] lg:w-[15.963px] h-[13.611px] lg:h-[14.804px] text-black" />
+              </a>
+            )}
+          {editor.socialLinks?.instagram &&
+            editor.socialLinks.instagram !== "#" && (
+              <a
+                href={editor.socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-[22.632px] lg:w-[24.615px] h-[22.632px] lg:h-[24.615px] bg-white rounded-[11.316px] lg:rounded-[12.308px] flex items-center justify-center p-[4.526px] lg:p-[4.923px]"
+              >
+                <Instagram className="w-[13.582px] lg:w-[14.773px] h-[13.576px] lg:h-[14.766px] text-black" />
+              </a>
+            )}
+          {editor.socialLinks?.website &&
+            editor.socialLinks.website !== "#" && (
+              <a
+                href={editor.socialLinks.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-[22.632px] lg:w-[24.615px] h-[22.632px] lg:h-[24.615px] bg-white rounded-[11.316px] lg:rounded-[12.308px] flex items-center justify-center p-[4.526px] lg:p-[4.923px]"
+              >
+                <div className="w-[14px] lg:w-[16.975px] h-[12px] lg:h-[14.995px] bg-black rounded-sm"></div>
+              </a>
+            )}
         </div>
       </div>
     </div>
