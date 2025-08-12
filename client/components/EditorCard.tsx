@@ -31,6 +31,7 @@ export function EditorCard({ editor }: EditorCardProps) {
             src={editor.imageUrl}
             alt={editor.name || 'Editor'}
             className="w-full h-full object-cover rounded-l-[4px]"
+            style={{ objectPosition: '50% 25%' }}
             onError={(e) => {
               console.log('Image failed to load:', editor.imageUrl);
               const target = e.target as HTMLImageElement;
