@@ -21,7 +21,7 @@ export default function Index() {
         {/* Content Area */}
         <div className="flex-1 max-w-[1024px] bg-white px-4 sm:px-8 py-8 lg:py-[89px] mx-auto">
           {/* Title */}
-          <div className="mb-[30px] lg:mb-[57px]">
+          <div className="mb-[30px] lg:mb-[57px] pt-4">
             <h1
               className="text-black text-[28px] lg:text-[42px] font-extrabold leading-[100%] lg:leading-[112%] tracking-[-0.56px] lg:tracking-[-0.84px]"
               style={{ fontFamily: 'Greta Sans Pro, -apple-system, Roboto, Helvetica, sans-serif' }}
