@@ -14,6 +14,8 @@ export interface Database {
           linkedin_url: string | null;
           instagram_url: string | null;
           website_url: string | null;
+          x_url: string | null;
+          bluesky_url: string | null;
           created_at: string;
           updated_at: string;
         };
