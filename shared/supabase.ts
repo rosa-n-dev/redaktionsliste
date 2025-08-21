@@ -130,6 +130,8 @@ export function transformDbEditorToEditor(dbEditor: any): Editor {
       linkedin: dbEditor.linkedin_url || dbEditor.linkedin || undefined,
       instagram: dbEditor.instagram_url || dbEditor.instagram || undefined,
       website: dbEditor.website_url || dbEditor.website || undefined,
+      x_url: dbEditor.x_url || undefined,
+      bluesky_url: dbEditor.bluesky_url || undefined,
     },
   };
 }
