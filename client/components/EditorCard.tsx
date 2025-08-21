@@ -81,21 +81,6 @@ export function EditorCard({ editor }: EditorCardProps) {
             </span>
           </div>
 
-          {/* Email */}
-          {editor.email && (
-            <div className="mt-2">
-              <a
-                href={`mailto:${editor.email}`}
-                className="text-primary-text text-[11px] lg:text-[12px] hover:underline"
-                style={{
-                  fontFamily:
-                    "Inter, -apple-system, Roboto, Helvetica, sans-serif",
-                }}
-              >
-                {editor.email}
-              </a>
-            </div>
-          )}
 
           {/* Articles Button */}
           {editor.articles && (
