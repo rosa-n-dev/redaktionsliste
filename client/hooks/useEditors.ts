@@ -112,7 +112,7 @@ export function useEditors(): UseEditorsReturn {
         console.log('Attempting to fetch specific columns...');
         const result2 = await supabase
           .from('VOL.AT_Redaktionsliste_2025')
-          .select('id, name, Title, image_url, email, "Artikel zu Person", twitter_url, linkedin_url, instagram_url, website_url, created_at')
+          .select('id, name, Title, image_url, email, "Artikel zur Person", twitter_url, linkedin_url, instagram_url, website_url, x_url, bluesky_url, created_at')
           .order('created_at', { ascending: true });
 
         if (result2.error) {
