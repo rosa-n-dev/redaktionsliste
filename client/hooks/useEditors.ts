@@ -122,7 +122,7 @@ export function useEditors(): UseEditorsReturn {
           console.log('Attempting to fetch minimal columns...');
           const result3 = await supabase
             .from('VOL.AT_Redaktionsliste_2025')
-            .select('id, name, Title, image_url, email, "Artikel zu Person"')
+            .select('id, name, Title, image_url, email, "Artikel zur Person", x_url, bluesky_url')
             .limit(10);
 
           data = result3.data;
