@@ -12,6 +12,8 @@ export interface Editor {
     linkedin?: string;
     instagram?: string;
     website?: string;
+    x_url?: string;
+    bluesky_url?: string;
   };
 }
 
