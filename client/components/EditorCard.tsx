@@ -116,6 +116,14 @@ export function EditorCard({ editor }: EditorCardProps) {
 
         {/* Social Links */}
         <div className="absolute bottom-[11px] right-[14px] flex gap-[9px] lg:gap-[9.846px]">
+          {editor.email && (
+            <a
+              href={`mailto:${editor.email}`}
+              className="w-[22.632px] lg:w-[24.615px] h-[22.632px] lg:h-[24.615px] bg-white rounded-[11.316px] lg:rounded-[12.308px] flex items-center justify-center p-[4.526px] lg:p-[4.923px]"
+            >
+              <Mail className="w-[13.432px] lg:w-[14.61px] h-[13.729px] lg:h-[14.932px] text-black" />
+            </a>
+          )}
           {editor.socialLinks?.twitter &&
             editor.socialLinks.twitter !== "#" && (
               <a
