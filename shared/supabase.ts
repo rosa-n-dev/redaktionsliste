@@ -73,7 +73,7 @@ const IMAGE_MAPPING: { [key: string]: string } = {
   'Pascal Pletsch': 'PP_Pascal_Pletsch.JPG',
   'Martin Suppersberger': 'PP_Martin_Suppersberger.JPG',
   'Larissa Hermann': 'PP_Larissa_Hermann.JPG',
-  'Valentina Dotlić': 'PP_Valentina_Dotlic.JPG', // Note: no special characters in filename
+  'Valentina Dotlić': 'PP_Valentina_Dotlic.jpg', // Note: no special characters in filename
   'Paloma Mock': 'PP_Paloma_Mock.JPG',
   'Mirjam Mayer': 'PP_Mirjam_Mayer.JPG',
 };
