@@ -1,4 +1,4 @@
-import { Twitter, Linkedin, Instagram } from "lucide-react";
+import { Twitter, Linkedin, Instagram, Mail } from "lucide-react";
 
 export interface Editor {
   id: string;
