@@ -25,7 +25,7 @@ export default function SupabaseDemo() {
 
   try {
     const { error } = await supabase
-      .from(volat_redaktionsliste_2025)              // <-- use your real table
+      .from(TABLE_NAME)              // <-- use your real table
       .select("id")
       .limit(1);
 
