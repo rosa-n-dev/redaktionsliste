@@ -2,14 +2,14 @@
 export interface Database {
   public: {
     Tables: {
-      "volat_redaktionsliste_2025": {
+      volat_redaktionsliste_2025: {
         Row: {
           id: string;
           name: string;
-          Title: string;  // Using actual column name from database
+          Title: string; // Using actual column name from database
           image_url: string;
           email: string | null;
-          "Artikel zur Person": string | null;  // URL to articles page
+          "Artikel zur Person": string | null; // URL to articles page
           twitter_url: string | null;
           linkedin_url: string | null;
           instagram_url: string | null;
@@ -22,10 +22,10 @@ export interface Database {
         Insert: {
           id?: string;
           name: string;
-          Title: string;  // Using actual column name from database
+          Title: string; // Using actual column name from database
           image_url: string;
           email?: string | null;
-          "Artikel zur Person"?: string | null;  // Using actual column name with quotes for special characters
+          "Artikel zur Person"?: string | null; // Using actual column name with quotes for special characters
           twitter_url?: string | null;
           linkedin_url?: string | null;
           instagram_url?: string | null;
@@ -38,10 +38,10 @@ export interface Database {
         Update: {
           id?: string;
           name?: string;
-          Title?: string;  // Using actual column name from database
+          Title?: string; // Using actual column name from database
           image_url?: string;
           email?: string | null;
-          "Artikel zur Person"?: string | null;  // Using actual column name with quotes for special characters
+          "Artikel zur Person"?: string | null; // Using actual column name with quotes for special characters
           twitter_url?: string | null;
           linkedin_url?: string | null;
           instagram_url?: string | null;
@@ -71,17 +71,18 @@ export interface Editor {
 }
 
 // Supabase storage configuration for images
-const SUPABASE_STORAGE_BASE_URL = 'https://dayiaqaufaorxqsuzgxn.supabase.co/storage/v1/object/public/volat.redaktionsliste.profilbilder';
+const SUPABASE_STORAGE_BASE_URL =
+  "https://dayiaqaufaorxqsuzgxn.supabase.co/storage/v1/object/public/volat.redaktionsliste.profilbilder";
 
 // Mapping of editor names to their image file names
 const IMAGE_MAPPING: { [key: string]: string } = {
-  'Marc Springer': 'PP_Marc_Springer.JPG',
-  'Pascal Pletsch': 'PP_Pascal_Pletsch.JPG',
-  'Martin Suppersberger': 'PP_Martin_Suppersberger.JPG',
-  'Larissa Hermann': 'PP_Larissa_Hermann.JPG',
-  'Valentina Dotlić': 'PP_Valentina_Dotlic.jpg', // Note: no special characters in filename
-  'Paloma Mock': 'PP_Paloma_Mock.JPG',
-  'Mirjam Mayer': 'PP_Mirjam_Mayer.JPG',
+  "Marc Springer": "PP_Marc_Springer.JPG",
+  "Pascal Pletsch": "PP_Pascal_Pletsch.JPG",
+  "Martin Suppersberger": "PP_Martin_Suppersberger.JPG",
+  "Larissa Hermann": "PP_Larissa_Hermann.JPG",
+  "Valentina Dotlić": "PP_Valentina_Dotlic.jpg", // Note: no special characters in filename
+  "Paloma Mock": "PP_Paloma_Mock.JPG",
+  "Mirjam Mayer": "PP_Mirjam_Mayer.JPG",
 };
 
 // Function to get Supabase storage URL for an editor
@@ -90,7 +91,7 @@ function getEditorImageUrl(editorName: string): string {
 
   if (!fileName) {
     console.log(`No image mapping found for: ${editorName}`);
-    return '';
+    return "";
   }
 
   const fullUrl = `${SUPABASE_STORAGE_BASE_URL}/${fileName}`;
@@ -100,9 +101,15 @@ function getEditorImageUrl(editorName: string): string {
 
 // Utility function to transform database row to Editor type
 export function transformDbEditorToEditor(dbEditor: any): Editor {
-  console.log('Transforming editor:', dbEditor);
+  console.log("Transforming editor:", dbEditor);
 
-  const editorName = dbEditor.name || dbEditor.Name || dbEditor.vorname || dbEditor.Vorname || dbEditor.fullname || 'Name not available';
+  const editorName =
+    dbEditor.name ||
+    dbEditor.Name ||
+    dbEditor.vorname ||
+    dbEditor.Vorname ||
+    dbEditor.fullname ||
+    "Name not available";
 
   // Use Supabase storage URL mapping instead of database image_url
   const mappedImageUrl = getEditorImageUrl(editorName);
@@ -110,7 +117,11 @@ export function transformDbEditorToEditor(dbEditor: any): Editor {
   // Fallback to database URL if no mapping exists
   let imageUrl = mappedImageUrl;
   if (!imageUrl) {
-    imageUrl = dbEditor.image_url || dbEditor.imageUrl || dbEditor.photo_url || dbEditor.avatar_url;
+    imageUrl =
+      dbEditor.image_url ||
+      dbEditor.imageUrl ||
+      dbEditor.photo_url ||
+      dbEditor.avatar_url;
     if (imageUrl) {
       imageUrl = imageUrl.trim();
     }
@@ -121,8 +132,15 @@ export function transformDbEditorToEditor(dbEditor: any): Editor {
   return {
     id: dbEditor.id || `editor-${Math.random()}`,
     name: editorName,
-    role: dbEditor.Title || dbEditor.title || dbEditor.role || dbEditor.Role || dbEditor.position || dbEditor.Position || 'Role not available',
-    imageUrl: imageUrl || '', // Don't use placeholder as fallback, let component handle it
+    role:
+      dbEditor.Title ||
+      dbEditor.title ||
+      dbEditor.role ||
+      dbEditor.Role ||
+      dbEditor.position ||
+      dbEditor.Position ||
+      "Role not available",
+    imageUrl: imageUrl || "", // Don't use placeholder as fallback, let component handle it
     email: dbEditor.email || undefined,
     articles: dbEditor["Artikel zur Person"] || dbEditor.articles || undefined,
     socialLinks: {

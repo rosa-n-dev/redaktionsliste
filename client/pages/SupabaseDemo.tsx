@@ -1,44 +1,46 @@
-import { useState, useEffect } from 'react';
-import { supabase, isSupabaseConfigured } from '@/lib/supabase';
+import { useState, useEffect } from "react";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
 export default function SupabaseDemo() {
-  const [connectionStatus, setConnectionStatus] = useState<'checking' | 'connected' | 'disconnected'>('checking');
+  const [connectionStatus, setConnectionStatus] = useState<
+    "checking" | "connected" | "disconnected"
+  >("checking");
   const [queryResult, setQueryResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [customQuery, setCustomQuery] = useState('');
-  const [tableName, setTableName] = useState('volat_redaktionsliste_2025');
+  const [customQuery, setCustomQuery] = useState("");
+  const [tableName, setTableName] = useState("volat_redaktionsliste_2025");
 
   // Common test queries including RLS-specific ones
   const testQueries = [
     {
-      name: 'Check RLS policies',
-      query: `SELECT schemaname, tablename, policyname, permissive, roles, cmd, qual FROM pg_policies WHERE tablename = '${tableName}';`
+      name: "Check RLS policies",
+      query: `SELECT schemaname, tablename, policyname, permissive, roles, cmd, qual FROM pg_policies WHERE tablename = '${tableName}';`,
     },
     {
-      name: 'List all tables',
-      query: `SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';`
+      name: "List all tables",
+      query: `SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';`,
     },
     {
-      name: 'Describe table structure',
-      query: `SELECT column_name, data_type, is_nullable FROM information_schema.columns WHERE table_name = '${tableName}' ORDER BY ordinal_position;`
+      name: "Describe table structure",
+      query: `SELECT column_name, data_type, is_nullable FROM information_schema.columns WHERE table_name = '${tableName}' ORDER BY ordinal_position;`,
     },
     {
-      name: 'Count rows (with RLS)',
-      query: `SELECT COUNT(*) as total_rows FROM "${tableName}";`
+      name: "Count rows (with RLS)",
+      query: `SELECT COUNT(*) as total_rows FROM "${tableName}";`,
     },
     {
-      name: 'First 5 rows (all columns)',
-      query: `SELECT * FROM "${tableName}" LIMIT 5;`
+      name: "First 5 rows (all columns)",
+      query: `SELECT * FROM "${tableName}" LIMIT 5;`,
     },
     {
-      name: 'Test name and title columns',
-      query: `SELECT id, name, Title, image_url, email, "Artikel zu Person" FROM "${tableName}" LIMIT 3;`
+      name: "Test name and title columns",
+      query: `SELECT id, name, Title, image_url, email, "Artikel zu Person" FROM "${tableName}" LIMIT 3;`,
     },
     {
-      name: 'Test social media columns',
-      query: `SELECT id, linkedin_url, instagram_url, twitter_url, website_url FROM "${tableName}" LIMIT 3;`
-    }
+      name: "Test social media columns",
+      query: `SELECT id, linkedin_url, instagram_url, twitter_url, website_url FROM "${tableName}" LIMIT 3;`,
+    },
   ];
 
   useEffect(() => {
@@ -46,27 +48,34 @@ export default function SupabaseDemo() {
   }, []);
 
   const checkConnection = async () => {
-    setConnectionStatus('checking');
+    setConnectionStatus("checking");
     if (!isSupabaseConfigured() || !supabase) {
-      setConnectionStatus('disconnected');
-      setError('Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.');
+      setConnectionStatus("disconnected");
+      setError(
+        "Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.",
+      );
       return;
     }
 
     try {
-      const { data, error } = await supabase.from('information_schema.tables').select('table_name').limit(1);
+      const { data, error } = await supabase
+        .from("information_schema.tables")
+        .select("table_name")
+        .limit(1);
       if (error) throw error;
-      setConnectionStatus('connected');
+      setConnectionStatus("connected");
       setError(null);
     } catch (err) {
-      setConnectionStatus('disconnected');
-      setError(err instanceof Error ? err.message : 'Failed to connect to Supabase');
+      setConnectionStatus("disconnected");
+      setError(
+        err instanceof Error ? err.message : "Failed to connect to Supabase",
+      );
     }
   };
 
   const executeQuery = async (query: string) => {
     if (!supabase) {
-      setError('Supabase client not available');
+      setError("Supabase client not available");
       return;
     }
 
@@ -75,41 +84,43 @@ export default function SupabaseDemo() {
     setQueryResult(null);
 
     try {
-      console.log('Executing query:', query);
-      
+      console.log("Executing query:", query);
+
       // Use rpc for raw SQL queries
-      const { data, error } = await supabase.rpc('exec_sql', { query_text: query });
-      
+      const { data, error } = await supabase.rpc("exec_sql", {
+        query_text: query,
+      });
+
       if (error) {
         // If rpc doesn't work, try direct table queries for our specific table
         if (query.includes(`SELECT * FROM "${tableName}"`)) {
           const { data: tableData, error: tableError } = await supabase
             .from(tableName)
-            .select('*')
+            .select("*")
             .limit(5);
-          
+
           if (tableError) throw tableError;
           setQueryResult(tableData);
           return;
         }
-        
+
         if (query.includes(`COUNT(*)`)) {
           const { count, error: countError } = await supabase
             .from(tableName)
-            .select('*', { count: 'exact', head: true });
-          
+            .select("*", { count: "exact", head: true });
+
           if (countError) throw countError;
           setQueryResult([{ total_rows: count }]);
           return;
         }
-        
+
         throw error;
       }
-      
+
       setQueryResult(data);
     } catch (err) {
-      console.error('Query error:', err);
-      setError(err instanceof Error ? err.message : 'Query failed');
+      console.error("Query error:", err);
+      setError(err instanceof Error ? err.message : "Query failed");
     } finally {
       setLoading(false);
     }
@@ -124,21 +135,31 @@ export default function SupabaseDemo() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Supabase Integration Demo</h1>
-        
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+          Supabase Integration Demo
+        </h1>
+
         {/* Connection Status */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Connection Status</h2>
           <div className="flex items-center gap-3">
-            <div className={`w-3 h-3 rounded-full ${
-              connectionStatus === 'connected' ? 'bg-green-500' : 
-              connectionStatus === 'disconnected' ? 'bg-red-500' : 'bg-yellow-500'
-            }`}></div>
+            <div
+              className={`w-3 h-3 rounded-full ${
+                connectionStatus === "connected"
+                  ? "bg-green-500"
+                  : connectionStatus === "disconnected"
+                    ? "bg-red-500"
+                    : "bg-yellow-500"
+              }`}
+            ></div>
             <span className="font-medium">
-              {connectionStatus === 'connected' ? 'Connected to Supabase' :
-               connectionStatus === 'disconnected' ? 'Disconnected' : 'Checking...'}
+              {connectionStatus === "connected"
+                ? "Connected to Supabase"
+                : connectionStatus === "disconnected"
+                  ? "Disconnected"
+                  : "Checking..."}
             </span>
-            <button 
+            <button
               onClick={checkConnection}
               className="ml-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             >
@@ -179,7 +200,7 @@ export default function SupabaseDemo() {
               <button
                 key={index}
                 onClick={() => executeQuery(test.query)}
-                disabled={loading || connectionStatus !== 'connected'}
+                disabled={loading || connectionStatus !== "connected"}
                 className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 text-left disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <div className="font-medium text-gray-900">{test.name}</div>
@@ -203,10 +224,14 @@ export default function SupabaseDemo() {
             />
             <button
               onClick={executeCustomQuery}
-              disabled={loading || connectionStatus !== 'connected' || !customQuery.trim()}
+              disabled={
+                loading ||
+                connectionStatus !== "connected" ||
+                !customQuery.trim()
+              }
               className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Executing...' : 'Execute Query'}
+              {loading ? "Executing..." : "Execute Query"}
             </button>
           </div>
         </div>
@@ -223,7 +248,8 @@ export default function SupabaseDemo() {
             ) : (
               <div className="space-y-4">
                 <div className="text-sm text-gray-600">
-                  Found {Array.isArray(queryResult) ? queryResult.length : 0} result(s)
+                  Found {Array.isArray(queryResult) ? queryResult.length : 0}{" "}
+                  result(s)
                 </div>
                 <pre className="bg-gray-100 p-4 rounded-md overflow-auto text-sm">
                   {JSON.stringify(queryResult, null, 2)}
@@ -237,7 +263,10 @@ export default function SupabaseDemo() {
         <div className="bg-white rounded-lg shadow-md p-6 mt-6">
           <h2 className="text-xl font-semibold mb-4">RLS Policy Suggestions</h2>
           <div className="space-y-4">
-            <p className="text-gray-700">If you're having issues with RLS, try adding this policy to your table:</p>
+            <p className="text-gray-700">
+              If you're having issues with RLS, try adding this policy to your
+              table:
+            </p>
             <div className="bg-gray-100 p-4 rounded-md">
               <code className="text-sm">
                 {`-- Allow anonymous users to read all data
@@ -250,7 +279,8 @@ FOR SELECT USING (auth.role() = 'authenticated');`}
               </code>
             </div>
             <p className="text-sm text-gray-600">
-              Run these in your Supabase SQL editor to allow read access to your table.
+              Run these in your Supabase SQL editor to allow read access to your
+              table.
             </p>
           </div>
         </div>
@@ -260,15 +290,27 @@ FOR SELECT USING (auth.role() = 'authenticated');`}
           <h2 className="text-xl font-semibold mb-4">Environment Variables</h2>
           <div className="space-y-2 font-mono text-sm">
             <div>
-              <span className="text-gray-600">VITE_SUPABASE_URL:</span>{' '}
-              <span className={import.meta.env.VITE_SUPABASE_URL ? 'text-green-600' : 'text-red-600'}>
-                {import.meta.env.VITE_SUPABASE_URL ? '✓ Set' : '✗ Not set'}
+              <span className="text-gray-600">VITE_SUPABASE_URL:</span>{" "}
+              <span
+                className={
+                  import.meta.env.VITE_SUPABASE_URL
+                    ? "text-green-600"
+                    : "text-red-600"
+                }
+              >
+                {import.meta.env.VITE_SUPABASE_URL ? "✓ Set" : "✗ Not set"}
               </span>
             </div>
             <div>
-              <span className="text-gray-600">VITE_SUPABASE_ANON_KEY:</span>{' '}
-              <span className={import.meta.env.VITE_SUPABASE_ANON_KEY ? 'text-green-600' : 'text-red-600'}>
-                {import.meta.env.VITE_SUPABASE_ANON_KEY ? '✓ Set' : '✗ Not set'}
+              <span className="text-gray-600">VITE_SUPABASE_ANON_KEY:</span>{" "}
+              <span
+                className={
+                  import.meta.env.VITE_SUPABASE_ANON_KEY
+                    ? "text-green-600"
+                    : "text-red-600"
+                }
+              >
+                {import.meta.env.VITE_SUPABASE_ANON_KEY ? "✓ Set" : "✗ Not set"}
               </span>
             </div>
           </div>
