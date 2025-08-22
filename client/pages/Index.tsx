@@ -16,32 +16,28 @@ export default function SupabaseDemo() {
   }, []);
 
   const checkConnection = async () => {
-    setConnectionStatus("checking");
-    if (!isSupabaseConfigured() || !supabase) {
-      setConnectionStatus("disconnected");
-      setError(
-        "Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY."
-      );
-      return;
-    }
+  setConnectionStatus("checking");
+  if (!isSupabaseConfigured() || !supabase) {
+    setConnectionStatus("disconnected");
+    setError("Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.");
+    return;
+  }
 
-    try {
-      // original (demo) behavior:
-      const { error } = await supabase
-        .from("information_schema.tables")
-        .select("table_name")
-        .limit(1);
-      if (error) throw error;
+  try {
+    const { error } = await supabase
+      .from(TABLE_NAME)              // <-- use your real table
+      .select("id")
+      .limit(1);
 
-      setConnectionStatus("connected");
-      setError(null);
-    } catch (err) {
-      setConnectionStatus("disconnected");
-      setError(
-        err instanceof Error ? err.message : "Failed to connect to Supabase"
-      );
-    }
-  };
+    if (error) throw error;
+
+    setConnectionStatus("connected");
+    setError(null);
+  } catch (err) {
+    setConnectionStatus("disconnected");
+    setError(err instanceof Error ? err.message : "Failed to connect to Supabase");
+  }
+};
 
   const loadSampleRows = async () => {
     if (!supabase) return;
