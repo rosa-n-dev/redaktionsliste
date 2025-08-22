@@ -101,7 +101,7 @@ export function useEditors(): UseEditorsReturn {
       // First attempt: Try to fetch all columns
       console.log('Attempting to fetch all columns...');
       const result1 = await supabase
-        .from('VOL.AT_Redaktionsliste_2025')
+        .from('volat_redaktionsliste_2025')
         .select('*')
         .order('created_at', { ascending: true });
 
@@ -111,7 +111,7 @@ export function useEditors(): UseEditorsReturn {
         // Second attempt: Try specific columns with correct column names including email and articles
         console.log('Attempting to fetch specific columns...');
         const result2 = await supabase
-          .from('VOL.AT_Redaktionsliste_2025')
+          .from('volat_redaktionsliste_2025')
           .select('id, name, Title, image_url, email, "Artikel zur Person", twitter_url, linkedin_url, instagram_url, website_url, x_url, bluesky_url, created_at')
           .order('created_at', { ascending: true });
 
@@ -121,7 +121,7 @@ export function useEditors(): UseEditorsReturn {
           // Third attempt: Try minimal columns
           console.log('Attempting to fetch minimal columns...');
           const result3 = await supabase
-            .from('VOL.AT_Redaktionsliste_2025')
+            .from('volat_redaktionsliste_2025')
             .select('id, name, Title, image_url, email, "Artikel zur Person", x_url, bluesky_url')
             .limit(10);
 
@@ -174,14 +174,14 @@ export function useEditors(): UseEditorsReturn {
       return () => {}; // No cleanup needed for sample data
     }
 
-    // Setup Supabase real-time subscription for VOL.AT_Redaktionsliste_2025
+    // Setup Supabase real-time subscription for volat_redaktionsliste_2025
     const subscription = supabase
       .channel('vol_redaktionsliste_changes')
       .on('postgres_changes',
         {
           event: '*',
           schema: 'public',
-          table: 'VOL.AT_Redaktionsliste_2025'
+          table: 'volat_redaktionsliste_2025'
         },
         (payload) => {
           console.log('Real-time update received:', payload);
