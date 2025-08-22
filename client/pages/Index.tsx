@@ -1,74 +1,87 @@
-import { EditorCard } from "@/components/EditorCard";
-import { useEditors } from "@/hooks/useEditors";
+import { useEffect, useState } from "react";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+
+type Author = {
+  id: string;
+  name: string;
+  Title: string | null;
+  image_url: string | null;
+  email: string | null;
+  linkedin_url: string | null;
+  instagram_url: string | null;
+  twitter_url: string | null;
+  website_url: string | null;
+  bluesky_url: string | null;
+};
 
 export default function Index() {
-  const { editors, loading, error, isUsingSupabase } = useEditors();
+  const [authors, setAuthors] = useState<Author[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const TABLE_NAME = "volat_redaktionsliste_2025";
+
+  useEffect(() => {
+    const loadAuthors = async () => {
+      if (!isSupabaseConfigured() || !supabase) {
+        setError("Supabase is not configured. Please check your env vars.");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from(TABLE_NAME)
+          .select(
+            "id, name, Title, image_url, email, linkedin_url, instagram_url, twitter_url, website_url, bluesky_url"
+          )
+          .order("name", { ascending: true });
+
+        if (error) throw error;
+        setAuthors(data ?? []);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load authors");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadAuthors();
+  }, []);
+
+  if (loading) return <div className="p-8">Loading authors…</div>;
+  if (error) return <div className="p-8 text-red-600">Error: {error}</div>;
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Top Navigation Bar - Hidden */}
-      <div className="w-full bg-black h-[64px] items-center justify-end px-8 relative hidden">
-        <div className="absolute top-[-30px] right-8 h-[30px] bg-black w-full"></div>
-        <div className="text-white text-[12px] font-bold tracking-[1px] leading-normal">
-          VN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ESSEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HIGHSPEED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WEBMAIL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VOLMOBIL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IMMO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ANZEIGER
-        </div>
-      </div>
-
-      {/* Main Content with Sidebar Layout */}
-      <div className="flex min-h-[calc(100vh-64px)] lg:min-h-[calc(100vh-64px)]">
-        {/* Left Sidebar - Hidden */}
-        <div className="w-[324px] bg-black-sidebar flex-shrink-0 hidden"></div>
-
-        {/* Content Area */}
-        <div className="flex-1 max-w-[1024px] bg-white px-4 sm:px-8 py-8 lg:py-[89px] mx-auto">
-          {/* Title */}
-          <div className="mb-[30px] lg:mb-[57px] pt-4">
-            <h1
-              className="text-black text-[28px] lg:text-[42px] font-extrabold leading-[100%] lg:leading-[112%] tracking-[-0.56px] lg:tracking-[-0.84px]"
-              style={{ fontFamily: 'Greta Sans Pro, -apple-system, Roboto, Helvetica, sans-serif' }}
-            >
-              Unsere Autor:innen
-            </h1>
-
-            {/* Supabase Status Indicator */}
-            {!isUsingSupabase && (
-              <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-md">
-                <p className="text-sm text-amber-800">
-                  <strong>Using sample data.</strong> Connect to Supabase to display editors from your VOL.AT_Redaktionsliste_2025 table.
-                  <br />
-                  <a href="#open-mcp-popover" className="text-amber-900 underline">Open MCP popover</a> and connect to Supabase, or{' '}
-                  <a href="/supabase-demo" className="text-amber-900 underline font-semibold">test your Supabase connection</a>.
-                </p>
-              </div>
+    <div className="max-w-6xl mx-auto p-8 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      {authors.map((author) => (
+        <div
+          key={author.id}
+          className="bg-white shadow rounded-lg p-6 flex flex-col items-center text-center"
+        >
+          {author.image_url && (
+            <img
+              src={author.image_url}
+              alt={author.name}
+              className="w-24 h-24 rounded-full object-cover mb-4"
+            />
+          )}
+          <h2 className="text-lg font-semibold">{author.name}</h2>
+          {author.Title && (
+            <p className="text-gray-600 text-sm">{author.Title}</p>
+          )}
+          <div className="mt-3 flex flex-wrap justify-center gap-3 text-sm text-blue-600">
+            {author.email && <a href={`mailto:${author.email}`}>Email</a>}
+            {author.linkedin_url && <a href={author.linkedin_url}>LinkedIn</a>}
+            {author.instagram_url && (
+              <a href={author.instagram_url}>Instagram</a>
             )}
-          </div>
-
-          {/* Editors Grid */}
-          <div className="flex flex-col gap-[30px] lg:grid lg:grid-cols-2 lg:gap-y-[33px] lg:gap-x-[22px] lg:max-w-[842px] lg:justify-items-start">
-            {loading ? (
-              <div className="col-span-full flex items-center justify-center py-12">
-                <div className="text-center">
-                  <div className="animate-spin h-8 w-8 border-2 border-primary-yellow border-t-transparent rounded-full mx-auto mb-4"></div>
-                  <p className="text-primary-text">Loading editors...</p>
-                </div>
-              </div>
-            ) : error ? (
-              <div className="col-span-full flex items-center justify-center py-12">
-                <div className="text-center">
-                  <p className="text-red-600 mb-2">Error loading editors</p>
-                  <p className="text-primary-text text-sm">{error}</p>
-                </div>
-              </div>
-            ) : (
-              editors.map((editor) => (
-                <EditorCard key={editor.id} editor={editor} />
-              ))
-            )}
+            {author.twitter_url && <a href={author.twitter_url}>Twitter</a>}
+            {author.website_url && <a href={author.website_url}>Website</a>}
+            {author.bluesky_url && <a href={author.bluesky_url}>Bluesky</a>}
           </div>
         </div>
-
-        {/* Right Sidebar - Hidden */}
-        <div className="w-[324px] bg-black-sidebar flex-shrink-0 hidden"></div>
-      </div>
+      ))}
     </div>
   );
 }
