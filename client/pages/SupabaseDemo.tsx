@@ -7,7 +7,7 @@ export default function SupabaseDemo() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [customQuery, setCustomQuery] = useState('');
-  const [tableName, setTableName] = useState('VOL.AT_Redaktionsliste_2025');
+  const [tableName, setTableName] = useState('volat_redaktionsliste_2025');
 
   // Common test queries including RLS-specific ones
   const testQueries = [
