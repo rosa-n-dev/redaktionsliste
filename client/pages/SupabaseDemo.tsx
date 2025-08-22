@@ -29,7 +29,11 @@ export default function SupabaseDemo() {
       return;
     }
     try {
-      const { error } = await supabase.from('information_schema.tables').select('table_name').limit(1);
+      const { error } = await supabase
+        .from(tvolat_redaktionsliste_2025)               // <-- use your real table
+        .select('id')
+        .limit(1);
+
       if (error) throw error;
       setConnectionStatus('connected');
       setError(null);
