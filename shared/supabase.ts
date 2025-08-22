@@ -1,8 +1,8 @@
-// Supabase database types for VOL.AT_Redaktionsliste_2025
+// Supabase database types for volat_redaktionsliste_2025
 export interface Database {
   public: {
     Tables: {
-      "VOL.AT_Redaktionsliste_2025": {
+      "volat_redaktionsliste_2025": {
         Row: {
           id: string;
           name: string;
