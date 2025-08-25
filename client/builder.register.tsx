@@ -1,6 +1,4 @@
 import { Builder } from "@builder.io/react";
-import SupabaseList from "./components/SupabaseList";
 
-Builder.registerComponent(SupabaseList, {
-  name: "SupabaseList",
-});
+// Builder.io component registrations
+// Add your custom components here when needed
