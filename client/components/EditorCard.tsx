@@ -1,3 +1,4 @@
+// Editor card component - reflects live data from Supabase
 import { Twitter, Linkedin, Instagram, Mail } from "lucide-react";
 
 export interface Editor {
