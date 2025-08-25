@@ -12,8 +12,6 @@ import SupabaseDemo from "./pages/SupabaseDemo";
 import NotFound from "./pages/NotFound";
 import Embed from './pages/embed';
 
-<Route path="/embed" element={<Embed />} />
-
 
 const queryClient = new QueryClient();
 
