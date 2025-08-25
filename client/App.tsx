@@ -1,3 +1,4 @@
+import "../builder.register";
 import "./global.css";
 
 import { Toaster } from "@/components/ui/toaster";
