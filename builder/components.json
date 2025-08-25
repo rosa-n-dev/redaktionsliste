@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/BuilderIO/fusion/refs/heads/main/schemas/components.schema.json",
+  "components": [
+    {
+      "name": "SupabaseList",
+      "path": "client/components/SupabaseList.tsx"
+    }
+  ]
+}
